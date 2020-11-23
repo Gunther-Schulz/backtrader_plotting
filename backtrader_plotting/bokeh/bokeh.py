@@ -128,7 +128,8 @@ class Bokeh(metaclass=bt.MetaParams):
                     continue
                 apply_config(obj, config)
             elif ctype == 'id':  # plotid
-                plotid = getattr(obj.plotinfo, 'plotid', None)
+                plotinfo = getattr(obj, "plotinfo", None)
+                plotid = getattr(plotinfo, "plotid", None)
                 if plotid is None or plotid != target:
                     continue
                 apply_config(obj, config)
