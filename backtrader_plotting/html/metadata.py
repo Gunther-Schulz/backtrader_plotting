@@ -61,8 +61,12 @@ def _get_strategy(strategy: bt.Strategy, include_src=True) -> str:
 
     md += '## Indicators:\n\n'
     for i in strategy.getindicators():
-        md += f'### {labelizer.label(i)}\n\n'
-        md += _get_parameter_table(i.params)
+        # Skip line buffer objects
+        # https://community.backtrader.com/topic/2070/plotting-a-linesoperationobject/5
+        # https://www.backtrader.com/blog/posts/2016-07-30-macd-settings/macd-settings/
+        if not isinstance(i, bt.LineBuffer):
+            md += f"### {labelizer.label(i)}\n\n"
+            md += _get_parameter_table(i.params)
 
     if include_src:
         md += 'Source Code:\n'

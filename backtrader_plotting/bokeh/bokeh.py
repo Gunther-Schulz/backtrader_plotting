@@ -87,7 +87,8 @@ class Bokeh(metaclass=bt.MetaParams):
 
         for objs in [datas, inds, obs]:
             for idx, obj in enumerate(objs):
-                self._configure_plotobject(obj, idx, strategy)
+                if not isinstance(obj, bt.LineBuffer):
+                    self._configure_plotobject(obj, idx, strategy)
 
     def _configure_plotobject(self, obj, idx, strategy):
         if self.p.plotconfig is None:
