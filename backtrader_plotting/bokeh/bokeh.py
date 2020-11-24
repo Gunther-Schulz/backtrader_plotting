@@ -222,7 +222,7 @@ class Bokeh(metaclass=bt.MetaParams):
 
         figure_envs: List[Figure] = []
         for master, slaves in data_graph.items():
-            plotorder = getattr(master.plotinfo, 'plotorder', 0)
+            plotorder = getattr(master.plotinfo, "plotorder", self.p.scheme.plotorder)
             figureenv = Figure(strategy, self._cur_figurepage.cds, hoverc, start, end, self.p.scheme, master, plotorder)
 
             figureenv.plot(master)
